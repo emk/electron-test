@@ -21,7 +21,7 @@ module.exports = [{
     __filename: false
   }
 }, {
-  entry: './index.ts',
+  entry: './index.tsx',
   output: {
     filename: 'index.js'
   },
