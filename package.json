@@ -1,14 +1,17 @@
 {
   "name": "electest",
   "version": "0.0.1",
-  "description": "",
+  "description": "A sample app using Electron, TypeScript & WebPack",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "start": "electron ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "electron": "^1.4.12",
     "ts-loader": "^1.3.2",
     "typescript": "^2.1.4",
     "webpack": "^1.14.0"
