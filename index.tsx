@@ -72,7 +72,7 @@ class Player extends React.Component<IPlayerProps, INoState> {
       }
     }
 
-    return <div className="splash"><button onClick={onOpen}>Open</button></div>
+    return <button onClick={onOpen}>Open</button>
   }
 
   renderVideo(url: string) {
