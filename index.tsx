@@ -2,13 +2,14 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Action, createStore } from 'redux';
 
-enum CounterAction { Increment, Decrement }
+const INCREMENT = "INCREMENT"
+const DECREMENT = "DECREMENT"
 
 function counter(state = 0, action: Action): number {
   switch (action.type) {
-    case CounterAction.Increment:
+    case INCREMENT:
       return state + 1
-    case CounterAction.Decrement:
+    case DECREMENT:
       return state - 1
     default:
       return state
@@ -51,8 +52,8 @@ function render() {
   ReactDOM.render(
     <Counter
       value={store.getState() || 0}
-      onIncrement={() => store.dispatch({ type: CounterAction.Increment })}
-      onDecrement={() => store.dispatch({ type: CounterAction.Decrement })}
+      onIncrement={() => store.dispatch({ type: INCREMENT })}
+      onDecrement={() => store.dispatch({ type: DECREMENT })}
       />,
     document.getElementById('root')
   )
