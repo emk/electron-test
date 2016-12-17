@@ -23,4 +23,3 @@ function createWindow() {
 }
 
 app.on('ready', createWindow)
-console.log("Hello, world")

@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './app.ts',
+  entry: './index.ts',
   output: {
-    filename: 'main.js'
+    filename: 'index.js'
   },
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension. 
@@ -13,10 +13,5 @@ module.exports = {
       { test: /\.tsx?$/, loader: 'ts-loader' }
     ]
   },
-  target: 'electron-renderer',
-  // Don't step on `__dirname` or `__filename`.
-  node: {
-    __dirname: false,
-    __filename: false
-  }
+  target: 'electron-renderer'
 }
