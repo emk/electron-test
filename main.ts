@@ -8,7 +8,7 @@ let win
 function createWindow() {
   win = new BrowserWindow({ width: 800, height: 600 })
 
-  let indexUrl = url.format({
+  const indexUrl = url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true

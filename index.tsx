@@ -1,7 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Action, createStore } from 'redux';
+import { createStore } from 'redux';
+import * as Electron from 'electron'
+import { format as urlFormat } from 'url';
 
+// Get access to dialog boxes in our main UI process.
+const dialog = Electron.remote.dialog
 
 // The state of our movie player.
 interface PlayerState {
@@ -53,7 +57,18 @@ class Player extends React.Component<IPlayerProps, INoState> {
     const { url, onSetUrl } = this.props
 
     function onOpen() {
-      onSetUrl("http://example.com/")
+      const files = dialog.showOpenDialog({
+        title: "Open video",
+        properties: ["openFile"]
+      })
+      if (files) {
+        const url = urlFormat({
+          pathname: files[0],
+          protocol: 'file:',
+          slashes: true
+        })
+        onSetUrl(url)
+      }
     }
 
     return (
