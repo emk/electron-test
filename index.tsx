@@ -67,19 +67,45 @@ function player(state: PlayerState = newPlayerState(),
 
 interface IPlayerProps {
   url?: string,
-  onSetUrl: (url: string) => void
+  onSetUrl: (url: string) => void,
+  onSetSize: (width: number, height: number) => void
 }
 
 interface INoState {
 }
 
+type LoadedMetadataEvent = {
+  videoWidth: number,
+  videoHeight: number
+}
+
 class Player extends React.Component<IPlayerProps, INoState> {
   static propTypes = {
     url: React.PropTypes.string,
-    onSetUrl: React.PropTypes.func.isRequired
+    onSetUrl: React.PropTypes.func.isRequired,
+    onSetSize: React.PropTypes.func.isRequired
   }
 
-  renderOpenButton(onSetUrl: (url: string) => void) {
+  render() {
+    const { url } = this.props
+    if (url) {
+      return this.renderVideo(url)
+    } else {
+      return this.renderOpenButton()
+    }
+  }
+
+  renderVideo(url: string) {
+    const { onSetSize } = this.props
+    function onLoadedMetadata(event: React.SyntheticEvent<HTMLVideoElement>) {
+      onSetSize(event.currentTarget.videoWidth, event.currentTarget.videoHeight)
+    }
+    return <video src={url} onLoadedMetadata={onLoadedMetadata} controls></video>
+  }
+
+  renderOpenButton() {
+    const { onSetUrl } = this.props
+
     function onOpen() {
       const files = dialog.showOpenDialog({
         title: "Open video",
@@ -100,19 +126,6 @@ class Player extends React.Component<IPlayerProps, INoState> {
 
     return <button onClick={onOpen}>Open</button>
   }
-
-  renderVideo(url: string) {
-    return <video src={url} controls></video>
-  }
-
-  render() {
-    const { url, onSetUrl } = this.props
-    if (url) {
-      return this.renderVideo(url)
-    } else {
-      return this.renderOpenButton(onSetUrl)
-    }
-  }
 }
 
 const store = createStore(player)
@@ -122,6 +135,7 @@ function render() {
     <Player
       url={(store.getState() || newPlayerState()).url}
       onSetUrl={(url) => store.dispatch(setUrlAction(url))}
+      onSetSize={(w, h) => store.dispatch(setSizeAction(w, h))}
       />,
     document.getElementById('root')
   )
