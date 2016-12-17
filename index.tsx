@@ -2,58 +2,78 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Action, createStore } from 'redux';
 
-const INCREMENT = "INCREMENT"
-const DECREMENT = "DECREMENT"
 
-function counter(state = 0, action: Action): number {
+// The state of our movie player.
+interface PlayerState {
+  url?: string
+}
+
+type SET_URL = "SET_URL";
+const SET_URL: SET_URL = "SET_URL";
+
+type SetUrlAction = {
+  type: SET_URL,
+  url: string
+}
+
+function setUrlAction(url: string): SetUrlAction {
+  return { type: SET_URL, url: url }
+}
+
+type OtherAction = { type: '' }
+const OtherAction: OtherAction = { type: '' }
+
+type PlayerAction = SetUrlAction | OtherAction
+
+function player(state: PlayerState = {}, action: PlayerAction): PlayerState {
   switch (action.type) {
-    case INCREMENT:
-      return state + 1
-    case DECREMENT:
-      return state - 1
+    case SET_URL:
+      // TODO: Use immutability-helper for updates.
+      return { url: action.url }
     default:
       return state
   }
 }
 
-interface ICounterProps {
-  value: number,
-  onIncrement: () => void,
-  onDecrement: () => void
+interface IPlayerProps {
+  url?: string,
+  onSetUrl: (url: string) => void
 }
 
 interface INoState {
 }
 
-class Counter extends React.Component<ICounterProps, INoState> {
+class Player extends React.Component<IPlayerProps, INoState> {
   static propTypes = {
-    value: React.PropTypes.number.isRequired,
-    onIncrement: React.PropTypes.func.isRequired,
-    onDecrement: React.PropTypes.func.isRequired
+    url: React.PropTypes.string,
+    onSetUrl: React.PropTypes.func.isRequired
   }
 
   render() {
-    const { value, onIncrement, onDecrement } = this.props
+    const { url, onSetUrl } = this.props
+
+    function onOpen() {
+      onSetUrl("http://example.com/")
+    }
+
     return (
       <div>
-        <p>Counter: {value}</p>
+        <p>URL: {url}</p>
         <p>
-          <button onClick={onIncrement}>+</button>
-          <button onClick={onDecrement}>-</button>
+          <button onClick={onOpen}>Open</button>
         </p>
       </div>
     )
   }
 }
 
-const store = createStore(counter, 0)
+const store = createStore(player)
 
 function render() {
   ReactDOM.render(
-    <Counter
-      value={store.getState() || 0}
-      onIncrement={() => store.dispatch({ type: INCREMENT })}
-      onDecrement={() => store.dispatch({ type: DECREMENT })}
+    <Player
+      url={(store.getState() || {}).url}
+      onSetUrl={(url) => store.dispatch(setUrlAction(url))}
       />,
     document.getElementById('root')
   )
