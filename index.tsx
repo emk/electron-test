@@ -53,13 +53,14 @@ class Player extends React.Component<IPlayerProps, INoState> {
     onSetUrl: React.PropTypes.func.isRequired
   }
 
-  render() {
-    const { url, onSetUrl } = this.props
-
+  renderOpenButton(onSetUrl: (url: string) => void) {
     function onOpen() {
       const files = dialog.showOpenDialog({
         title: "Open video",
-        properties: ["openFile"]
+        properties: ["openFile"],
+        filters: [
+          { name: "Video Files", extensions: ["mp4"] }
+        ]
       })
       if (files) {
         const url = urlFormat({
@@ -71,14 +72,20 @@ class Player extends React.Component<IPlayerProps, INoState> {
       }
     }
 
-    return (
-      <div>
-        <p>URL: {url}</p>
-        <p>
-          <button onClick={onOpen}>Open</button>
-        </p>
-      </div>
-    )
+    return <div className="splash"><button onClick={onOpen}>Open</button></div>
+  }
+
+  renderVideo(url: string) {
+    return <video src={url} controls></video>
+  }
+
+  render() {
+    const { url, onSetUrl } = this.props
+    if (url) {
+      return this.renderVideo(url)
+    } else {
+      return this.renderOpenButton(onSetUrl)
+    }
   }
 }
 
