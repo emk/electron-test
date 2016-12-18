@@ -74,11 +74,6 @@ interface IPlayerProps {
 interface INoState {
 }
 
-type LoadedMetadataEvent = {
-  videoWidth: number,
-  videoHeight: number
-}
-
 class Player extends React.Component<IPlayerProps, INoState> {
   static propTypes = {
     url: React.PropTypes.string,
@@ -135,7 +130,7 @@ function render() {
     <Player
       url={(store.getState() || newPlayerState()).url}
       onSetUrl={(url) => store.dispatch(setUrl(url))}
-      onSetSize={(w, h) => store.dispatch(setSize(w, h))}
+      onSetSize={(w, h) => Electron.ipcRenderer.send("video-size", w, h)}
       />,
     document.getElementById('root')
   )
