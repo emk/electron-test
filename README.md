@@ -1,4 +1,7 @@
-# TypeScript + Electron + React
+# TypeScript + Electron + React + Redux + Neon + Rust
+
+This is a "spike", or throwaway project to prove that a particular set of
+technologies can all actually play together.  This is all throwaway code.
 
 Install the React Developer Tools plugin in Chrome if you haven't already.
 
