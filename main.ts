@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, globalShortcut, ipcMain } from 'electron';
 import * as url from 'url';
 import * as path from 'path';
 
@@ -8,14 +8,18 @@ let win: Electron.BrowserWindow | null
 function createWindow() {
   win = new BrowserWindow({ width: 400, height: 300 })
 
+  globalShortcut.register('F12', () => {
+    if (win) {
+      win.webContents.openDevTools()
+    }
+  })
+
   const indexUrl = url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   })
   win.loadURL(indexUrl)
-
-  win.webContents.openDevTools()
 
   win.on('closed', () => {
     win = null
