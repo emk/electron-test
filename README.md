@@ -3,11 +3,18 @@
 Install the React Developer Tools plugin in Chrome if you haven't already.
 
 ```sh
+. env.sh
 npm install -g typings
 yarn
 typings install
-npm run build # Or `watch`, to recompile as needed.
+npm run install
 npm start
+```
+
+To recompile the JavaScript code after making changes, try:
+
+```sh
+npm run watch
 ```
 
 Note that our type definitions for TypeScript are still a bit dodgy.  In
