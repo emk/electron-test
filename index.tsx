@@ -6,7 +6,7 @@ import { format as urlFormat } from 'url'
 import objectAssign = require("object-assign")
 
 // Get access to dialog boxes in our main UI process.
-const dialog = Electron.remote.dialog
+const remote = Electron.remote
 
 // The state of our movie player.
 interface PlayerState {
@@ -31,7 +31,7 @@ type SetUrlAction = {
   url: string
 }
 
-function setUrlAction(url: string): SetUrlAction {
+function setUrl(url: string): SetUrlAction {
   return { type: SET_URL, url: url }
 }
 
@@ -44,7 +44,7 @@ type SetSizeAction = {
   height: number
 }
 
-function setSizeAction(width: number, height: number): SetSizeAction {
+function setSize(width: number, height: number): SetSizeAction {
   return { type: SET_SIZE, width: width, height: height }
 }
 
@@ -107,7 +107,7 @@ class Player extends React.Component<IPlayerProps, INoState> {
     const { onSetUrl } = this.props
 
     function onOpen() {
-      const files = dialog.showOpenDialog({
+      const files = remote.dialog.showOpenDialog({
         title: "Open video",
         properties: ["openFile"],
         filters: [
@@ -134,8 +134,8 @@ function render() {
   ReactDOM.render(
     <Player
       url={(store.getState() || newPlayerState()).url}
-      onSetUrl={(url) => store.dispatch(setUrlAction(url))}
-      onSetSize={(w, h) => store.dispatch(setSizeAction(w, h))}
+      onSetUrl={(url) => store.dispatch(setUrl(url))}
+      onSetSize={(w, h) => store.dispatch(setSize(w, h))}
       />,
     document.getElementById('root')
   )
