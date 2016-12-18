@@ -1,0 +1,14 @@
+[package]
+name = "testnative"
+version = "0.1.0"
+authors = ["Eric Kidd <git@randomhacks.net>"]
+license = "MIT"
+
+[lib]
+name = "testnative"
+crate-type = ["dylib"]
+
+[dependencies]
+env_logger = "0.3.5"
+log = "0.3.6"
+neon = "0.1"

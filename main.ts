@@ -1,6 +1,10 @@
 import { app, BrowserWindow, globalShortcut, ipcMain } from 'electron';
-import * as url from 'url';
-import * as path from 'path';
+import url = require('url');
+import path = require('path');
+import native = require('./native');
+
+native.init()
+console.log("From Rust:", native.hello())
 
 // Global window object so it doesn't go out of scope and get GCed.
 let win: Electron.BrowserWindow | null
