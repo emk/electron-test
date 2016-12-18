@@ -48,6 +48,11 @@ function setSize(width: number, height: number): SetSizeAction {
   return { type: SET_SIZE, width: width, height: height }
 }
 
+// See https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/
+// for the code which explains how we use `OtherAction` to cheat and make
+// Redux messages strongly typed.  It's a bit evil but cool.  Essentially
+// this message acts as a (disjoint) alternative to all known messages, and
+// represents any unknown message.
 type OtherAction = { type: '' }
 const OtherAction: OtherAction = { type: '' }
 
