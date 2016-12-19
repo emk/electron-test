@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 import Electron = require('electron')
 import { format as urlFormat } from 'url'
 import objectAssign = require("object-assign")
-import native = require('./native');
+import native = require('../../native');
 
 native.init()
 console.log("From Rust:", native.hello())

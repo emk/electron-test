@@ -1,5 +1,5 @@
 module.exports = [{
-  entry: './main.ts',
+  entry: './src/main/main.ts',
   output: {
     filename: 'main.js'
   },
@@ -22,7 +22,7 @@ module.exports = [{
     __filename: false
   }
 }, {
-  entry: './index.tsx',
+  entry: './src/renderer/index.tsx',
   output: {
     filename: 'app/index.js'
   },

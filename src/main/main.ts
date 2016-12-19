@@ -1,7 +1,7 @@
 import { app, BrowserWindow, globalShortcut, ipcMain } from 'electron';
 import url = require('url');
 import path = require('path');
-import native = require('./native');
+import native = require('../../native');
 
 native.init()
 console.log("From Rust:", native.hello())
@@ -50,7 +50,7 @@ function constrainSize(desired: Size, max: Size): Size {
 }
 
 ipcMain.on('video-size', (event, width: number, height: number) => {
-  console.log('video-size', win, width, height)
+  console.log('video-size', width, height)
   if (win) {
     const [newWidth, newHeight] = constrainSize([width, height], [800, 600])
     console.log("Setting size:", newWidth, newHeight)
