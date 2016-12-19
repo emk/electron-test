@@ -1,7 +1,10 @@
-lang: node_js
+sudo: required
+dist: trusty
+
+language: node_js
 
 node_js:
-  - "6"
+  - "7.2.1"
 
 os:
   - linux
@@ -17,10 +20,33 @@ install:
       export DISPLAY=':99.0'
       Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
     fi
+  - curl https://sh.rustup.rs -sSf | sh -s -- -y
+  - export PATH=~/.cargo/bin:$PATH
+  - rustc --version
+  - cargo --version
   - . env.sh
   - npm install -g typings
   - typings install
   - yarn
   - npm run install
+
+script:
   - npm run dist
   - ls dist/*
+
+test:
+  - echo "Tests not set up yet"
+
+before_deploy:
+  - mv dist/*.AppImage dist/electest-$TRAVIS_TAG-$(uname -m).AppImage
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Jrbjk+hDh4pcLiHQ6+CYvickZbpL4+lS5GZOzrnImzKm7ksantQg9wtu4mWGpPG1Kjbk3/qbsCsTcZBi3BW9KAvGDj94Q+x3kFrOuIbQvmemIzWQ8IsNPBkQYv5uxvNmG9U+2ayhg+Dv0gLk7552G4Tl1RPVUXm8RWEBgrU6+BnWtbZwtTuroQEHemxaIBnZWjDapZEcFSow/40ZjyqEFdFfC0bljtds37UpMQZUtZXZqR2RZmp5WTzoroiN+wkmhxsn5UQhBRieEb3kst23pBh6tsJ+00WG7MssTWZsE4vXLaGqFLzBzufFlzFU4tOWxcwm0g+farJHc7J4yYzTWJRjNRq3Vjmq7NGyLAGlin/QMqXmzBc1yCoxms6DlHdH/Jn1xNqc2x9VbS5oCOrautTg2r5Sk89yVX2Qn6Rensb+wsNkmfRMZiIdE0Rglc67Qr3oJaO7ZWiendI4SSj+pesSb9zhqZ8adqpOHgK0D/Ta4ot1pZWOdBgP98KglrLex55EW0AIzFs+ADqcj5w0n4FVpFw71vQ8xqZ3ehurUXnGB3Lk1B8A/FdjlOgtnoHqQ+YCJii9QcuIIwTv14I06VOWX4D6s08LIDzWvXczglAnvcMlgCq/6hSBzmnK4NMm8Vs0koUmwMGvmScnFNPX6YURIn69nCeBTIe1Dqggink=
+  file: "dist/electest-$TRAVIS_TAG-$(uname -m).AppImage"
+  skip_cleanup: true
+  on:
+    repo: emk/electron-test
+    tags: true
+    all_branches: true

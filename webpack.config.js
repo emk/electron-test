@@ -10,11 +10,13 @@ module.exports = [{
   module: {
     loaders: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: 'ts-loader' },
-      { test: /\.node$/,   loader: "node-loader" }
+      { test: /\.tsx?$/, loader: 'ts-loader' }
     ]
   },
   target: 'electron-main',
+  externals: {
+    '../../native': "require('./native')"
+  },
   // Don't step on `__dirname` or `__filename`, because we need to use
   // these to find our supporting files.
   node: {
@@ -33,9 +35,11 @@ module.exports = [{
   module: {
     loaders: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: 'ts-loader' },
-      { test: /\.node$/,   loader: "node-loader" }
+      { test: /\.tsx?$/, loader: 'ts-loader' }
     ]
   },
-  target: 'electron-renderer'
+  target: 'electron-renderer',
+  externals: {
+    '../../native': "require('../native')"
+  }
 }]
