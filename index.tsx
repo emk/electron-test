@@ -4,6 +4,10 @@ import { createStore } from 'redux'
 import Electron = require('electron')
 import { format as urlFormat } from 'url'
 import objectAssign = require("object-assign")
+import native = require('./native');
+
+native.init()
+console.log("From Rust:", native.hello())
 
 // Get access to dialog boxes in our main UI process.
 const remote = Electron.remote
