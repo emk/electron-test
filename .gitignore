@@ -1,7 +1,7 @@
 /node_modules/
 /typings/
 /main.js
-/index.js
+/app/index.js
 *.map
 /native/target/
 /native/index.node
