@@ -3,6 +3,13 @@
 This is a "spike", or throwaway project to prove that a particular set of
 technologies can all actually play together.  This is all throwaway code.
 
+![Rust](screenshots/electron-rust-main-and-browser-processes.png)
+
+Above: A Rust plugin running in Electron, in both the main process and the
+renderer process.
+
+## To run it
+
 Install the React Developer Tools plugin in Chrome if you haven't already.
 
 ```sh
