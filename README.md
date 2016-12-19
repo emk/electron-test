@@ -8,6 +8,29 @@ technologies can all actually play together.  This is all throwaway code.
 Above: A Rust plugin running in Electron, in both the main process and the
 renderer process.
 
+The technologies involved:
+
+- [TypeScript][]. Type-checking for JavaScript, with nice IDE support
+  (including Emacs via `tide`).
+- [Electron][]. Use JavaScript to write portable apps based on Chromium and
+  NodeJS.
+- [React][]. HTML user interfaces expressed as a function which transforms
+  a data model into rendered HTML.
+- [Redux][]. A data model and event framework for use with React.  Has
+  support for undo, replay, event logs, time travel, etc.
+- [Rust][]. A compiled language which is fast, safe and expressive.
+- [Neon][]. Build NodeJS addons using Rust.
+- [webpack][]. The glue that pieces everything else together.
+- Duct tape.
+
+[TypeScript]: https://www.typescriptlang.org/
+[Electron]: http://electron.atom.io/
+[React]: https://facebook.github.io/react/
+[Redux]: http://redux.js.org/
+[Rust]: https://www.rust-lang.org/
+[Neon]: http://neon.rustbridge.io/
+[webpack]: https://webpack.github.io/
+
 ## There are binaries!
 
 Binaries for Linux are available on the [Releases][] page.  Binaries for

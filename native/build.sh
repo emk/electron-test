@@ -13,7 +13,8 @@
 set -euo pipefail
 
 # Create a fake home directory under ~/.electron-gyp to cache things
-# related to Electron builds.
+# related to Electron builds.  We need to make symlinks to various Rust
+# config directories if we want this to work.
 mkdir -p ~/.electron-gyp
 if [ ! -h ~/.electron-gyp/.cargo ]; then
     ln -s ~/.cargo ~/.electron-gyp/
