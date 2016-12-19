@@ -14,7 +14,17 @@ Binaries for Linux are available on the [Releases][] page.  Binaries for
 MacOS and Windows are presumably just a matter of messing around with the
 build system and TravisCI/AppVeyor.
 
+To install the binaries on Linux, download an `*.AppImage` file, put it
+somewhere useful, run `chmod +x` on it, and execute it.  It will offer to
+install icons, launcher items, and so forth the first time you run it.  See
+the [AppImage][] site for more details—it's basically a self-running ISO
+image that gets mounted on `/tmp`, with a complete Linux environment built
+into it.  Imagine Docker for GUI applications.
+
+Electron also offers an auto-update system, which I haven't looked into.
+
 [Releases]: https://github.com/emk/electron-test/releases
+[AppImage]: http://appimage.org/
 
 ## To run it
 
