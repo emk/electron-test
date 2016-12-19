@@ -7,12 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "native/build.sh && webpack",
     "watch": "webpack --watch",
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "build"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "7zip-bin-linux": "^1.0.3",
     "electron": "^1.4.12",
+    "electron-builder": "^10.8.1",
     "electron-react-devtools": "^0.4.0",
     "neon-cli": "^0.1.7",
     "node-loader": "^0.6.0",
@@ -29,5 +32,11 @@
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0"
+  },
+  "build": {
+    "appId": "net.randomhacks.electron-test",
+    "linux": {
+      "target": ["AppImage"]
+    }
   }
 }

@@ -5,3 +5,4 @@
 *.map
 /native/target/
 /native/index.node
+/dist/

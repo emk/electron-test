@@ -37,3 +37,11 @@ In the browser console the first time:
 ```js
 require('electron-react-devtools').install()
 ```
+
+When you're ready to produce a distributable binary, try the following on
+Linux:
+
+```sh
+npm run dist
+dist/electest-*-x86_64.AppImage
+```
