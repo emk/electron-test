@@ -8,6 +8,14 @@ technologies can all actually play together.  This is all throwaway code.
 Above: A Rust plugin running in Electron, in both the main process and the
 renderer process.
 
+## There are binaries!
+
+Binaries for Linux are available on the [Releases][] page.  Binaries for
+MacOS and Windows are presumably just a matter of messing around with the
+build system and TravisCI/AppVeyor.
+
+[Releases]: https://github.com/emk/electron-test/releases
+
 ## To run it
 
 Install the React Developer Tools plugin in Chrome if you haven't already.
