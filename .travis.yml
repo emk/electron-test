@@ -1,0 +1,26 @@
+lang: node_js
+
+node_js:
+  - "6"
+
+os:
+  - linux
+
+addons:
+  apt:
+    packages:
+      - xvfb
+
+install:
+  - |
+    if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+      export DISPLAY=':99.0'
+      Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+    fi
+  - . env.sh
+  - npm install -g typings
+  - typings install
+  - yarn
+  - npm run install
+  - npm run dist
+  - ls dist/*
