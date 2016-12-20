@@ -31,7 +31,21 @@ if [ ! -d ~/.node-gyp/iojs-$npm_config_target ]; then
     node_modules/.bin/node-gyp install
 fi
 
-# Run the actual build, and copy it to where node will find it.
-cd native
-cargo build --release
-cp target/release/libtestnative.so index.node
+# Run the actual build, and copy it to where node will find it.  Ideally
+# we'd just call `neon build`, but that requires neon-bindings/neon#109 and
+# neon-bindings/neon-cli#31 to have any chance of working.
+case `uname -s` in
+    Darwin)
+        cd native
+        cargo rustc --release -- -C link-args=-Wl,-undefined,dynamic_lookup
+        cp target/release/libtestnative.dylib index.node
+        ;;
+    Linux)
+        cd native
+        cargo build --release
+        cp target/release/libtestnative.so index.node
+        ;;
+    *)
+        echo "Don't know how to build native extensions on this platform" 2>&1
+        exit 1
+esac
