@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "7zip-bin-linux": "^1.0.3",
+    "7zip-bin": "^2.0.4",
     "electron": "^1.4.12",
     "electron-builder": "^10.8.1",
     "electron-react-devtools": "^0.4.0",
