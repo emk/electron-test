@@ -25,7 +25,7 @@ install:
   - rustc --version
   - cargo --version
   - . env.sh
-  - npm install -g typings
+  - npm install -g typings yarn
   - typings install
   - yarn
   - npm run install
