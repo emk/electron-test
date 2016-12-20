@@ -13,7 +13,7 @@ console.log("From Rust:", native.hello())
 const remote = Electron.remote
 
 // The state of our movie player.
-interface PlayerState {
+type PlayerState = {
   url?: string
   width: number,
   height: number
