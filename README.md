@@ -1,3 +1,5 @@
+**WARNING: This hasn't been updated in years, and it depends on ancient NodeJS libraries with security vulnerabilities. DO NOT USE.**
+
 # TypeScript + Electron + React + Redux + Neon + Rust
 
 This is a "spike", or throwaway project to prove that a particular set of
